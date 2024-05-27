@@ -19,6 +19,13 @@ namespace Api.Utilities.Controllers
         {
             try
             {
+                if (domain.Contains('@'))
+                {
+                    string[] parts = domain.Split('@');
+
+                    Ok(await _service.CheckEmailProvider(parts[1]));
+                }
+
                 return Ok(await _service.CheckEmailProvider(domain));
             }
             catch
